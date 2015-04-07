@@ -10,6 +10,13 @@ class Time(object):
 
         self.hour = hour
         self.minute = minute
+    def __cmp__(self,other):
+        if cmp(self.hour,other.hour)==0 and cmp(self.minute,other.minute)==0:
+            return 0
+        elif self.hour>other.hour or (self.hour==other.hour and self.minute>other.minute):
+            return 1
+        else:
+            return -1
 
 class Interval(object):
     def __init__(self, start, end):
@@ -47,6 +54,7 @@ class Interval(object):
         except:
             return "param err."
         
+        
     def modifyType(self,param):
         if isinstance(param, str):  # change string to Time
             TimeElems = param.split(":")
@@ -81,6 +89,22 @@ def most_intervals_overlap_count(intervals):
     1
     '''
     # TODO: implement this function
-    sorted(intervals, key=attrgetter("hour","minute"))
+    intervals.sort(key=lambda interval: interval.start)   # sort intervals
+    TimeNodeList = []
+    for i in range(0,len(intervals)): # add time node into TimeNodeList; index:1 for start, index:0 for end
+        TimeNodeList.append({"node":intervals[i].start,"index":1})
+        TimeNodeList.append({"node":intervals[i].end,"index":0})
+   
+    TimeNodeList = sorted(TimeNodeList, key=lambda intervalIndex: intervalIndex['node'])  # sort TimeNodeList. If end node equal start node, the end node is in the front.  
+    cnt = 0
+    maxCnt = 0
+    for NodeAndIndex in TimeNodeList:
+        if NodeAndIndex['index']==1:
+            cnt += 1
+            maxCnt = (maxCnt>cnt and maxCnt or cnt)
+        elif NodeAndIndex['index']==0:
+            cnt -= 1
     
-    pass
+    return maxCnt
+
+print most_intervals_overlap_count([Interval(Time(6,0), Time(12,0)),Interval(Time(9, 0), Time(10,23)),Interval(Time(7,0), Time(10,0))])
