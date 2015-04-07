@@ -85,13 +85,18 @@ def most_intervals_overlap_count(intervals):
     1
     '''
     # TODO: implement this function
-    intervals.sort(key=lambda interval: interval.start)   # sort intervals
+    
+    #intervals.sort(key=lambda interval: interval.start)   # sort intervals
     TimeNodeList = []
-    for i in range(0,len(intervals)): # add time node into TimeNodeList; index:1 for start, index:0 for end
-        TimeNodeList.append({"node":intervals[i].start,"index":1})
-        TimeNodeList.append({"node":intervals[i].end,"index":0})
-   
-    TimeNodeList = sorted(TimeNodeList, key=lambda intervalIndex: intervalIndex['node'])  # sort TimeNodeList. If end node equal start node, the end node is in the front.  
+    for interval in intervals: # add time node into TimeNodeList; index:1 for start, index:0 for end
+        TimeNodeList.append({"node":interval.start,"index":1})
+        TimeNodeList.append({"node":interval.end,"index":0})
+    def NodeIndexCmp(oneNodeIndex, anotherNodeIndex):
+        if cmp(oneNodeIndex['node'],anotherNodeIndex['node'])==0:
+            return cmp(oneNodeIndex['index'],anotherNodeIndex['index'])
+        else:   
+            return cmp(oneNodeIndex['node'],anotherNodeIndex['node'])
+    TimeNodeList = sorted(TimeNodeList, NodeIndexCmp)  # sort TimeNodeList. If end node equal start node, the end node is in the front.  
     cnt = 0
     maxCnt = 0
     for NodeAndIndex in TimeNodeList:
