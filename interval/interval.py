@@ -41,20 +41,16 @@ class Interval(object):
           
         self.start = start
         self.end = end
-        
     def __str__(self):
         try:
             return "Interval(%02d:%02d -> %02d:%02d)" %(self.start.hour, self.start.minute, self.end.hour, self.end.minute)
         except:
             return "param err."
-    
     def __repr__(self):
         try:
             return "Interval(%02d:%02d -> %02d:%02d)" %(self.start.hour, self.start.minute, self.end.hour, self.end.minute)
         except:
-            return "param err."
-        
-        
+            return "param err."  
     def modifyType(self,param):
         if isinstance(param, str):  # change string to Time
             TimeElems = param.split(":")
