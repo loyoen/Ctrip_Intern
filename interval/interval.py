@@ -106,5 +106,3 @@ def most_intervals_overlap_count(intervals):
             cnt -= 1
     
     return maxCnt
-
-print most_intervals_overlap_count([Interval(Time(6,0), Time(12,0)),Interval(Time(9, 0), Time(10,23)),Interval(Time(7,0), Time(10,0))])
