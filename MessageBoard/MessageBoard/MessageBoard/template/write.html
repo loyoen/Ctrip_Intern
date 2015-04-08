@@ -1,0 +1,11 @@
+﻿{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block center %}
+<form action="/publish/" method="post">
+    <textarea name="title" placeholder="输入标题" style="width:100%;hight:10;" rows="1"></textarea>
+    <textarea name="contents" style="width:100%;hight:300;" rows="10"></textarea>
+    <input class="btn" type="submit" value="发表">
+</form>
+{% endblock %}
+    

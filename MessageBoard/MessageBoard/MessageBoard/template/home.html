@@ -1,0 +1,16 @@
+﻿{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block center %}
+<a href="/toWrite/"><font color="#F00"><B>写帖子</B></font></a>
+<br><br>
+    {%for item in blogs %}
+        <a href="/blog/{{item.id}}/"><B>{{item.title}}</B></a>
+        <br>
+        <font>{{item.contents}}</font>
+        <br>
+        <br>
+    {%endfor%}
+
+{% endblock %}
+    

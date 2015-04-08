@@ -1,0 +1,34 @@
+﻿<script>
+function removeBlog(blogid){
+    $.ajax({
+        type: "POST",
+        data: "blogid="+blogid,
+        url: "/delete/",
+        dataType: "text",
+        cache: false,
+        success: function(data){
+            window.location.href="/";
+         }
+    }); 
+}
+</script>
+
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block center %}
+<div id="allbody">
+<B><div id='title'>{{blog.title}}</div></B>
+<br>
+<div id='content'>{{blog.contents}}</div>
+<br>
+
+<button id="rmbtn" class="btn" onClick="removeBlog({{blog.id}})">删除</button>
+
+<a href="/correctData/{{blog.id}}/"><button id="modbtn" class="btn">修改</button></a>
+
+</div>
+
+{% endblock %}
+
+    

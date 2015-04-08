@@ -1,0 +1,39 @@
+﻿<script>
+
+function saveBlog(blogid){
+    var blogtitle = document.getElementById("title").value;
+    var blogcontents = document.getElementById("contents").value;
+    $.ajax({
+        type: "POST",
+        data: "blogid="+blogid+"&title="+blogtitle+"&contents="+blogcontents,
+        url: "/modify/",
+        dataType: "text",
+        cache: false,
+        success: function(data){
+            window.location.href="/blog/"+blogid+"/";
+         }
+    }); 
+}
+</script>
+
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block center %}
+<div id="allbody">
+    标题:<br>
+    <textarea id='title'>{{blog.title}}</textarea>
+    <br>
+    内容:<br>
+    <textarea id='contents'>{{blog.contents}}</textarea>
+<br>
+
+
+<button id="rmbtn" class="btn" onClick="saveBlog({{blog.id}})">保存</button>
+
+
+</div>
+
+{% endblock %}
+
+    
