@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 import settings
-from Board.views import *
+from blogs.views import *
 urlpatterns = [
     url(r'^$', index),
     url(r'^toWrite/$', toWrite),

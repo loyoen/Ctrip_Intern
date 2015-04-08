@@ -1,24 +1,22 @@
 # Django settings for myloan project.
 import os
-'''
-import sae.kvdb
-import sae.const
-import MySQLdb
-
-MYSQL_DB = sae.const.MYSQL_DB 
-MYSQL_USER = sae.const.MYSQL_USER 
-MYSQL_PASS = sae.const.MYSQL_PASS 
-MYSQL_HOST_M = sae.const.MYSQL_HOST 
-MYSQL_HOST_S = sae.const.MYSQL_HOST_S 
-MYSQL_PORT = sae.const.MYSQL_PORT
-
-'''
-MYSQL_DB = 'MessageBoard' 
-MYSQL_USER = 'root' 
-MYSQL_PASS = 'loyoen' 
-MYSQL_HOST_M = '' 
-MYSQL_HOST_S = '' 
-MYSQL_PORT = ''
+from os import environ
+debug = not environ.get("APP_NAME", "") 
+if debug:
+    MYSQL_DB = 'MessageBoard' 
+    MYSQL_USER = 'root' 
+    MYSQL_PASS = 'loyoen' 
+    MYSQL_HOST_M = '127.0.0.1' 
+    MYSQL_HOST_S = '127.0.0.1' 
+    MYSQL_PORT = '3306' 
+else:#SAE
+    import sae.const 
+    MYSQL_DB = sae.const.MYSQL_DB 
+    MYSQL_USER = sae.const.MYSQL_USER 
+    MYSQL_PASS = sae.const.MYSQL_PASS 
+    MYSQL_HOST_M = sae.const.MYSQL_HOST 
+    MYSQL_HOST_S = sae.const.MYSQL_HOST_S 
+    MYSQL_PORT = sae.const.MYSQL_PORT
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -141,7 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Board',
+    'blogs',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
